@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rock Paper Scissors</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <h1>Rock Paper Scissors</h1>
+
+    <div class="game-container">
+        <!-- Computer's Section -->
+        <div class="player">
+            <h2>Computer</h2>
+            <img id="computer-hand" class="hand" src="{{ url_for('static', filename='rock.png') }}" alt="Computer Hand">
+        </div>
+
+        <!-- Player's Section -->
+        <div class="player">
+            <h2>Player</h2>
+            <img id="user-hand" class="hand" src="{{ url_for('static', filename='rock.png') }}" alt="User Hand">
+        </div>
+    </div>
+
+    <!-- Buttons for Player Choice -->
+    <div class="choices">
+        <button onclick="playGame('rock')">Rock</button>
+        <button onclick="playGame('paper')">Paper</button>
+        <button onclick="playGame('scissors')">Scissors</button>
+    </div>
+
+    <!-- Result Display -->
+    <h2 id="result"></h2>
+
+    <script>
+        function playGame(userChoice) {
+            // Update Player's Hand
+            document.getElementById('user-hand').src = `/static/${userChoice}.png`;
+
+            // Send User Choice to Flask
+            fetch('/play', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({ choice: userChoice })
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Update Computer's Hand
+                document.getElementById('computer-hand').src = `/static/${data.computer_choice}.png`;
+
+                // Display Result
+                document.getElementById('result').innerText = data.result;
+            });
+        }
+    </script>
+</body>
+</html>

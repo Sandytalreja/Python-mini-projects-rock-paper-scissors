@@ -1,0 +1,62 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f4f4f4;
+    flex-direction: column;
+    font-family: Arial, sans-serif;
+}
+
+h1 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
+.game-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 50px; /* Space between computer and player */
+}
+
+.player {
+    text-align: center; /* Centers text and image */
+}
+
+.hand {
+    width: 150px;
+    height: 150px;
+    margin: 20px;
+    transition: transform 0.3s ease-in-out;
+}
+
+.hand:hover {
+    transform: scale(1.1);
+}
+
+.choices {
+    margin-top: 20px;
+}
+
+.choices button {
+    font-size: 20px;
+    padding: 10px 20px;
+    margin: 5px;
+    cursor: pointer;
+    border: none;
+    background-color: #4CAF50;
+    color: white;
+    border-radius: 5px;
+    transition: background 0.3s;
+}
+
+.choices button:hover {
+    background-color: #45a049;
+}
+
+#result {
+    font-size: 1.5rem;
+    margin-top: 15px;
+    font-weight: bold;
+}
